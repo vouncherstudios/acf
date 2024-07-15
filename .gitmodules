@@ -1,0 +1,3 @@
+[submodule "Commands"]
+	path = Commands
+	url = https://github.com/aikar/commands.git

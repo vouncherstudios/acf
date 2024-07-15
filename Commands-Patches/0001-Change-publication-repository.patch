@@ -1,0 +1,30 @@
+From ff2f3cd028e44c3278e656552ed83c1478253848 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Lu=C3=ADs=20Mendes?= <soconfirmo@hotmail.com>
+Date: Mon, 15 Jul 2024 20:04:33 -0300
+Subject: [PATCH] Change publication repository
+
+
+diff --git a/pom.xml b/pom.xml
+index d1a11023..90e0301b 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -39,12 +39,12 @@
+ 
+     <distributionManagement>
+         <repository>
+-            <id>aikar</id>
+-            <url>https://repo.aikar.co/content/repositories/aikar-release/</url>
++            <id>vouncherstudios-repository-releases</id>
++            <url>https://repo.vouncherstudios.com/releases</url>
+         </repository>
+         <snapshotRepository>
+-            <id>aikar</id>
+-            <url>https://repo.aikar.co/content/repositories/aikar-snapshots/</url>
++            <id>vouncherstudios-repository-snapshots</id>
++            <url>https://repo.vouncherstudios.com/snapshots</url>
+         </snapshotRepository>
+     </distributionManagement>
+ 
+-- 
+2.45.2
+
