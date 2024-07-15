@@ -1,0 +1,75 @@
+From b2c4182fe2100806aee6cd0bfc38a28b6c82508e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Lu=C3=ADs=20Mendes?= <soconfirmo@hotmail.com>
+Date: Mon, 15 Jul 2024 20:27:13 -0300
+Subject: [PATCH] Add option to confirm action on vanished player
+
+
+diff --git a/bukkit/src/main/java/co/aikar/commands/ACFBukkitUtil.java b/bukkit/src/main/java/co/aikar/commands/ACFBukkitUtil.java
+index a32c4f9d..76428874 100644
+--- a/bukkit/src/main/java/co/aikar/commands/ACFBukkitUtil.java
++++ b/bukkit/src/main/java/co/aikar/commands/ACFBukkitUtil.java
+@@ -269,6 +269,7 @@ public class ACFBukkitUtil {
+             return null;
+         }
+         String name = ACFUtil.replace(search, ":confirm", "");
++        name = ACFUtil.replace(name, ":confirmar", "");
+         List<Player> matches = Bukkit.getServer().matchPlayer(name);
+         List<Player> confirmList = new ArrayList<>();
+         findMatches(search, requester, matches, confirmList);
+@@ -308,7 +309,7 @@ public class ACFBukkitUtil {
+             Player player = iter.next();
+             if (requester instanceof Player && !((Player) requester).canSee(player)) {
+                 if (requester.hasPermission("acf.seevanish")) {
+-                    if (!search.endsWith(":confirm")) {
++                    if (!search.endsWith(":confirm") && !search.endsWith(":confirmar")) {
+                         confirmList.add(player);
+                         iter.remove();
+                     }
+diff --git a/bungee/src/main/java/co/aikar/commands/ACFBungeeUtil.java b/bungee/src/main/java/co/aikar/commands/ACFBungeeUtil.java
+index 038c619e..6c8dc899 100644
+--- a/bungee/src/main/java/co/aikar/commands/ACFBungeeUtil.java
++++ b/bungee/src/main/java/co/aikar/commands/ACFBungeeUtil.java
+@@ -114,6 +114,7 @@ public class ACFBungeeUtil {
+     public static ProxiedPlayer findPlayerSmart(CommandIssuer issuer, String search) {
+         CommandSender requester = issuer.getIssuer();
+         String name = ACFUtil.replace(search, ":confirm", "");
++        name = ACFUtil.replace(name, ":confirmar", "");
+ 
+         List<ProxiedPlayer> matches = new ArrayList<>(ProxyServer.getInstance().matchPlayer(name));
+ 
+diff --git a/sponge/src/main/java/co/aikar/commands/ACFSpongeUtil.java b/sponge/src/main/java/co/aikar/commands/ACFSpongeUtil.java
+index 0ad9a0f8..325f9f90 100644
+--- a/sponge/src/main/java/co/aikar/commands/ACFSpongeUtil.java
++++ b/sponge/src/main/java/co/aikar/commands/ACFSpongeUtil.java
+@@ -18,6 +18,7 @@ public class ACFSpongeUtil {
+             return null;
+         }
+         String name = ACFUtil.replace(search, ":confirm", "");
++        name = ACFUtil.replace(name, ":confirmar", "");
+ 
+         List<Player> matches = matchPlayer(name);
+         List<Player> confirmList = new ArrayList<>();
+@@ -58,7 +59,7 @@ public class ACFSpongeUtil {
+             Player player = iter.next();
+             if (requester instanceof Player && !((Player) requester).canSee(player)) {
+                 if (requester.hasPermission("acf.seevanish")) {
+-                    if (!search.endsWith(":confirm")) {
++                    if (!search.endsWith(":confirm") && !search.endsWith(":confirmar")) {
+                         confirmList.add(player);
+                         iter.remove();
+                     }
+diff --git a/velocity/src/main/java/co/aikar/commands/ACFVelocityUtil.java b/velocity/src/main/java/co/aikar/commands/ACFVelocityUtil.java
+index 949a9c72..0c9de1d9 100644
+--- a/velocity/src/main/java/co/aikar/commands/ACFVelocityUtil.java
++++ b/velocity/src/main/java/co/aikar/commands/ACFVelocityUtil.java
+@@ -21,6 +21,7 @@ public class ACFVelocityUtil {
+ 
+     public static Player findPlayerSmart(ProxyServer server, CommandIssuer issuer, String search) {
+         String name = ACFUtil.replace(search, ":confirm", "");
++        name = ACFUtil.replace(name, ":confirmar", "");
+ 
+         List<Player> matches = new ArrayList<>(matchPlayer(server, name));
+ 
+-- 
+2.45.2
+
