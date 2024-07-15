@@ -1,0 +1,85 @@
+From 9cb798f7825ab87dfb32dea7cc62ea537ce5e22e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Lu=C3=ADs=20Mendes?= <soconfirmo@hotmail.com>
+Date: Mon, 15 Jul 2024 20:30:36 -0300
+Subject: [PATCH] Change default message colors
+
+
+diff --git a/bukkit/src/main/java/co/aikar/commands/BukkitCommandManager.java b/bukkit/src/main/java/co/aikar/commands/BukkitCommandManager.java
+index 04e22c57..fe8aecb1 100755
+--- a/bukkit/src/main/java/co/aikar/commands/BukkitCommandManager.java
++++ b/bukkit/src/main/java/co/aikar/commands/BukkitCommandManager.java
+@@ -104,10 +104,10 @@ public class BukkitCommandManager extends CommandManager<
+         this.logger = Logger.getLogger(prefix != null ? prefix : this.plugin.getName());
+         this.timingManager = TimingManager.of(plugin);
+         this.commandMap = hookCommandMap();
+-        this.formatters.put(MessageType.ERROR, defaultFormatter = new BukkitMessageFormatter(ChatColor.RED, ChatColor.YELLOW, ChatColor.RED));
+-        this.formatters.put(MessageType.SYNTAX, new BukkitMessageFormatter(ChatColor.YELLOW, ChatColor.GREEN, ChatColor.WHITE));
+-        this.formatters.put(MessageType.INFO, new BukkitMessageFormatter(ChatColor.BLUE, ChatColor.DARK_GREEN, ChatColor.GREEN));
+-        this.formatters.put(MessageType.HELP, new BukkitMessageFormatter(ChatColor.AQUA, ChatColor.GREEN, ChatColor.YELLOW));
++        this.formatters.put(MessageType.ERROR, defaultFormatter = new BukkitMessageFormatter(ChatColor.RED));
++        this.formatters.put(MessageType.SYNTAX, new BukkitMessageFormatter(ChatColor.RED));
++        this.formatters.put(MessageType.INFO, new BukkitMessageFormatter(ChatColor.GRAY));
++        this.formatters.put(MessageType.HELP, new BukkitMessageFormatter(ChatColor.AQUA, ChatColor.WHITE, ChatColor.DARK_GRAY, ChatColor.GRAY, ChatColor.RED));
+         Pattern versionPattern = Pattern.compile("\\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)");
+         Matcher matcher = versionPattern.matcher(Bukkit.getVersion());
+         if (matcher.find()) {
+diff --git a/bungee/src/main/java/co/aikar/commands/BungeeCommandManager.java b/bungee/src/main/java/co/aikar/commands/BungeeCommandManager.java
+index c48dbe65..b32b3ba6 100644
+--- a/bungee/src/main/java/co/aikar/commands/BungeeCommandManager.java
++++ b/bungee/src/main/java/co/aikar/commands/BungeeCommandManager.java
+@@ -59,10 +59,10 @@ public class BungeeCommandManager extends CommandManager<
+ 
+     public BungeeCommandManager(Plugin plugin) {
+         this.plugin = plugin;
+-        this.formatters.put(MessageType.ERROR, defaultFormatter = new BungeeMessageFormatter(ChatColor.RED, ChatColor.YELLOW, ChatColor.RED));
+-        this.formatters.put(MessageType.SYNTAX, new BungeeMessageFormatter(ChatColor.YELLOW, ChatColor.GREEN, ChatColor.WHITE));
+-        this.formatters.put(MessageType.INFO, new BungeeMessageFormatter(ChatColor.BLUE, ChatColor.DARK_GREEN, ChatColor.GREEN));
+-        this.formatters.put(MessageType.HELP, new BungeeMessageFormatter(ChatColor.AQUA, ChatColor.GREEN, ChatColor.YELLOW));
++        this.formatters.put(MessageType.ERROR, defaultFormatter = new BungeeMessageFormatter(ChatColor.RED));
++        this.formatters.put(MessageType.SYNTAX, new BungeeMessageFormatter(ChatColor.RED));
++        this.formatters.put(MessageType.INFO, new BungeeMessageFormatter(ChatColor.GRAY));
++        this.formatters.put(MessageType.HELP, new BungeeMessageFormatter(ChatColor.AQUA, ChatColor.WHITE, ChatColor.DARK_GRAY, ChatColor.GRAY, ChatColor.RED));
+ 
+         getLocales(); // auto load locales
+ 
+diff --git a/sponge/src/main/java/co/aikar/commands/SpongeCommandManager.java b/sponge/src/main/java/co/aikar/commands/SpongeCommandManager.java
+index b914427d..127b0235 100644
+--- a/sponge/src/main/java/co/aikar/commands/SpongeCommandManager.java
++++ b/sponge/src/main/java/co/aikar/commands/SpongeCommandManager.java
+@@ -64,10 +64,10 @@ public class SpongeCommandManager extends CommandManager<
+         getLocales().addMessageBundles("acf-minecraft", pluginName, pluginName.toLowerCase(Locale.ENGLISH));
+         this.commandTiming = Timings.of(plugin, "Commands");
+ 
+-        this.formatters.put(MessageType.ERROR, defaultFormatter = new SpongeMessageFormatter(TextColors.RED, TextColors.YELLOW, TextColors.RED));
+-        this.formatters.put(MessageType.SYNTAX, new SpongeMessageFormatter(TextColors.YELLOW, TextColors.GREEN, TextColors.WHITE));
+-        this.formatters.put(MessageType.INFO, new SpongeMessageFormatter(TextColors.BLUE, TextColors.DARK_GREEN, TextColors.GREEN));
+-        this.formatters.put(MessageType.HELP, new SpongeMessageFormatter(TextColors.AQUA, TextColors.GREEN, TextColors.YELLOW));
++        this.formatters.put(MessageType.ERROR, defaultFormatter = new SpongeMessageFormatter(TextColors.RED));
++        this.formatters.put(MessageType.SYNTAX, new SpongeMessageFormatter(TextColors.RED));
++        this.formatters.put(MessageType.INFO, new SpongeMessageFormatter(TextColors.GRAY));
++        this.formatters.put(MessageType.HELP, new SpongeMessageFormatter(TextColors.AQUA, TextColors.WHITE, TextColors.DARK_GRAY, TextColors.GRAY, TextColors.RED));
+         getLocales(); // auto load locales
+ 
+         this.validNamePredicate = ACFSpongeUtil::isValidName;
+diff --git a/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java b/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java
+index ddbb3c36..7d77d100 100644
+--- a/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java
++++ b/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java
+@@ -55,10 +55,10 @@ public class VelocityCommandManager extends
+     public VelocityCommandManager(ProxyServer proxy, Object plugin) {
+         this.proxy = proxy;
+         this.plugin = proxy.getPluginManager().ensurePluginContainer(plugin);
+-        this.formatters.put(MessageType.ERROR, defaultFormatter = new VelocityMessageFormatter(NamedTextColor.RED, NamedTextColor.YELLOW, NamedTextColor.RED));
+-        this.formatters.put(MessageType.SYNTAX, new VelocityMessageFormatter(NamedTextColor.YELLOW, NamedTextColor.GREEN, NamedTextColor.WHITE));
+-        this.formatters.put(MessageType.INFO, new VelocityMessageFormatter(NamedTextColor.BLUE, NamedTextColor.DARK_GREEN, NamedTextColor.GREEN));
+-        this.formatters.put(MessageType.HELP, new VelocityMessageFormatter(NamedTextColor.AQUA, NamedTextColor.GREEN, NamedTextColor.YELLOW));
++        this.formatters.put(MessageType.ERROR, defaultFormatter = new VelocityMessageFormatter(NamedTextColor.RED));
++        this.formatters.put(MessageType.SYNTAX, new VelocityMessageFormatter(NamedTextColor.RED));
++        this.formatters.put(MessageType.INFO, new VelocityMessageFormatter(NamedTextColor.GRAY));
++        this.formatters.put(MessageType.HELP, new VelocityMessageFormatter(NamedTextColor.AQUA, NamedTextColor.WHITE, NamedTextColor.DARK_GRAY, NamedTextColor.GRAY, NamedTextColor.RED));
+ 
+         getLocales();
+ 
+-- 
+2.45.2
+
