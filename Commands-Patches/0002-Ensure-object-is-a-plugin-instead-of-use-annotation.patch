@@ -1,0 +1,22 @@
+From 5c79c70c6d84cd6aca3ca7698e2baee2fd87bc39 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Lu=C3=ADs=20Mendes?= <soconfirmo@hotmail.com>
+Date: Mon, 15 Jul 2024 20:14:47 -0300
+Subject: [PATCH] Ensure object is a plugin instead of use annotation
+
+
+diff --git a/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java b/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java
+index fc5dfcb6..ddbb3c36 100644
+--- a/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java
++++ b/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java
+@@ -54,7 +54,7 @@ public class VelocityCommandManager extends
+ 
+     public VelocityCommandManager(ProxyServer proxy, Object plugin) {
+         this.proxy = proxy;
+-        this.plugin = proxy.getPluginManager().getPlugin(plugin.getClass().getAnnotation(Plugin.class).id()).get();
++        this.plugin = proxy.getPluginManager().ensurePluginContainer(plugin);
+         this.formatters.put(MessageType.ERROR, defaultFormatter = new VelocityMessageFormatter(NamedTextColor.RED, NamedTextColor.YELLOW, NamedTextColor.RED));
+         this.formatters.put(MessageType.SYNTAX, new VelocityMessageFormatter(NamedTextColor.YELLOW, NamedTextColor.GREEN, NamedTextColor.WHITE));
+         this.formatters.put(MessageType.INFO, new VelocityMessageFormatter(NamedTextColor.BLUE, NamedTextColor.DARK_GREEN, NamedTextColor.GREEN));
+-- 
+2.45.2
+
