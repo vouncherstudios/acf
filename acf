@@ -13,6 +13,9 @@ case "$1" in
     "b" | "build")
         scripts/build.sh --jar || exit 1
     ;;
+    "d" | "deploy")
+        scripts/build.sh --deploy || exit 1
+    ;;
     "e" | "edit")
         scripts/edit.sh || exit 1
     ;;
@@ -25,6 +28,7 @@ case "$1" in
         echo "  * p, patch         | Applies all the patches to Commands"
         echo "  * m, up, merge     | Utility to aid in merging upstream"
         echo "  * b, build         | Builds the project"
+        echo "  * d, deploy        | Deploys the project"
         echo "  * e, edit          | Runs git rebase -i for ACF, allowing patches to be easily modified"
     ;;
 esac
