@@ -1,9 +1,7 @@
-name: Java CI with Maven
+name: Java CI with Maven and Deploy to Repository
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
     branches: [ "master" ]
 
 jobs:
@@ -25,8 +23,17 @@ jobs:
           distribution: 'temurin'
           architecture: x64
 
-      - name: Build
+      - uses: s4u/maven-settings-action@v3.0.0
+        with:
+          servers: |
+            [{
+                "id": "vouncherstudios-repository-snapshots",
+                "username": "${{ secrets.REPOSITORY_USERNAME }}",
+                "password": "${{ secrets.REPOSITORY_PASSWORD }}"
+            }]
+
+      - name: Build and Deploy
         run: |
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
-          ./acf build
+          ./acf deploy
