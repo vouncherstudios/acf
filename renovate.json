@@ -8,6 +8,5 @@
   ],
   "git-submodules": {
     "enabled": true
-  },
-  "postUpdateOptions": ["exec:./scripts/mergeUpstream.sh"]
+  }
 }
