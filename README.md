@@ -27,4 +27,4 @@ repositories {
 
 ## License
 
-Strawberry is released under the MIT License. See the [LICENSE](LICENSE) file for more details.
+ACF is released under the MIT License. See the [LICENSE](LICENSE) file for more details.
