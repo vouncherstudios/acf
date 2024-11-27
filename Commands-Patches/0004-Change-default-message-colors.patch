@@ -1,4 +1,4 @@
-From 9cb798f7825ab87dfb32dea7cc62ea537ce5e22e Mon Sep 17 00:00:00 2001
+From 7bdcb97387dd0c0161bb7d89f766581410616252 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Lu=C3=ADs=20Mendes?= <soconfirmo@hotmail.com>
 Date: Mon, 15 Jul 2024 20:30:36 -0300
 Subject: [PATCH] Change default message colors
@@ -61,6 +61,25 @@ index b914427d..127b0235 100644
          getLocales(); // auto load locales
  
          this.validNamePredicate = ACFSpongeUtil::isValidName;
+diff --git a/sponge10/src/main/java/co/aikar/commands/SpongeCommandManager.java b/sponge10/src/main/java/co/aikar/commands/SpongeCommandManager.java
+index 333ed918..9c3c979b 100644
+--- a/sponge10/src/main/java/co/aikar/commands/SpongeCommandManager.java
++++ b/sponge10/src/main/java/co/aikar/commands/SpongeCommandManager.java
+@@ -61,10 +61,10 @@ public class SpongeCommandManager extends CommandManager<
+         String pluginName = "acf-" + plugin.metadata().name();
+         getLocales().addMessageBundles("acf-minecraft", pluginName, pluginName.toLowerCase(Locale.ENGLISH));
+ 
+-        this.formatters.put(MessageType.ERROR, defaultFormatter = new SpongeMessageFormatter(NamedTextColor.RED, NamedTextColor.YELLOW, NamedTextColor.RED));
+-        this.formatters.put(MessageType.SYNTAX, new SpongeMessageFormatter(NamedTextColor.YELLOW, NamedTextColor.GREEN, NamedTextColor.WHITE));
+-        this.formatters.put(MessageType.INFO, new SpongeMessageFormatter(NamedTextColor.BLUE, NamedTextColor.DARK_GREEN, NamedTextColor.GREEN));
+-        this.formatters.put(MessageType.HELP, new SpongeMessageFormatter(NamedTextColor.AQUA, NamedTextColor.GREEN, NamedTextColor.YELLOW));
++        this.formatters.put(MessageType.ERROR, defaultFormatter = new SpongeMessageFormatter(NamedTextColor.RED));
++        this.formatters.put(MessageType.SYNTAX, new SpongeMessageFormatter(NamedTextColor.RED));
++        this.formatters.put(MessageType.INFO, new SpongeMessageFormatter(NamedTextColor.GRAY));
++        this.formatters.put(MessageType.HELP, new SpongeMessageFormatter(NamedTextColor.AQUA, NamedTextColor.WHITE, NamedTextColor.DARK_GRAY, NamedTextColor.GRAY, NamedTextColor.RED));
+         getLocales(); // auto load locales
+ 
+         this.validNamePredicate = ACFSpongeUtil::isValidName;
 diff --git a/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java b/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java
 index ddbb3c36..7d77d100 100644
 --- a/velocity/src/main/java/co/aikar/commands/VelocityCommandManager.java
@@ -81,5 +100,5 @@ index ddbb3c36..7d77d100 100644
          getLocales();
  
 -- 
-2.45.2
+2.47.0
 
